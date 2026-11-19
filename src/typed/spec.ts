@@ -1,7 +1,7 @@
 // TYPED SPEC (version 2) — every value has a type, and the type decides what the harness does with it.
 //
 //   values:      value types: a base type with meaning and a constraint (pattern, examples), and optionally a `parse`
-//                function that turns free text into the value ("nđ 99/2020" → "99/2020/NĐ-CP")
+//                function that turns free text into the value ("sổ tay hb 1" → "HB-001")
 //   structs:     named records of typed fields (results of functions)
 //   types:       object types; `id` names the value type of their refs; every property is typed; `find: true` makes a
 //                property a parameter of the type's find tool (the kind of filter comes from its type); `group: true`

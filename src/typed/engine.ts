@@ -569,7 +569,7 @@ export class TypedEngine {
     if (by && orderBy) throw new HarnessError(400, ["by counts, first / last list: one of them in a call"]);
     const r = this.req(this.date(at0), who);
     const limit = Math.max(1, Math.min(MAX_LIMIT, lim0 ?? this.spec.search.limit));
-    // values written loosely ("nđ 99/2020") are parsed into their type before they filter
+    // values written loosely ("sổ tay hb 1") are parsed into their type before they filter
     const filters: Filter[] = [];
     const rankers: PropDecl[] = [];
     for (const p of this.findProps(t)) {

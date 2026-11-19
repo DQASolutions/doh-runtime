@@ -8,7 +8,7 @@
 //   neighbours  one link from each ref, forward or backward
 //   heads       a change marker, for caches
 //
-// An adapter is written once per KIND of store (memory, the legal ledger over `kb serve`, a document database, SQL …), never per type:
+// An adapter is written once per KIND of store (memory, a document service over HTTP, a document database, SQL …), never per type:
 // where a type lives in the store is the spec's business. Each adapter states what it can do (`capabilities`); the
 // runtime re-applies every filter on what comes back, so a filter the store cannot push down still holds.
 
