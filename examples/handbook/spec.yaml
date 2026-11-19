@@ -1,0 +1,48 @@
+# A typed spec (version 2) for company handbooks: what an app author writes. The harness generates the rest.
+ontology: handbook
+version: 2
+search: { weak_below: 0.5, full: 3, limit: 6 }
+values:
+  HandbookId: { base: string, pattern: "^HB-\\d{3}$", examples: ["HB-001"], description: "a handbook's number", parse: parseHandbook }
+  SectionRef: { base: string, pattern: "^<HandbookId>(/\\d+)+$", examples: ["HB-001/2/1"], description: "a section: handbook / chapter / clause / point", parse: parseSection }
+structs:
+  HandbookSummary: { title: string, sections: int, owner: string? }
+types:
+  Handbook:
+    description: a handbook of company rules
+    store: main
+    id: HandbookId
+    properties:
+      title:  { type: text, find: true, description: "words of the handbook's name" }
+      owner:  { type: string, find: true, description: the department that keeps it }
+      issued: { type: date, find: true, description: date issued, from: issued_by }
+      issued_by: { type: "ref<Section>", description: the section that states the date }
+      status: { type: "enum[draft, active, retired]", find: true }
+    implements: { Citable: { title: title } }
+  Section:
+    description: a part of a handbook (chapter, clause, point) with its text in force on a date
+    store: main
+    id: SectionRef
+    properties:
+      handbook: { type: "ref<Handbook>", find: true, description: only in these handbooks }
+      level:    { type: "enum[chapter, clause, point]" }
+      title:    { type: string }
+      text:     { type: text, find: true, description: the matter in the handbook's words }
+      topics:   { type: "list<enum[safety, finance, discipline]>", find: true }
+    implements:
+      Citable:   { title: title, text: text, cite: citeSection }
+      Versioned: {}
+      Part:      { link: parent }
+      Referring: { link: refersTo }
+links:
+  parent:     { from: Section, to: Section, card: many-to-one, inverse: subsections, kind: composition }
+  inHandbook: { from: Section, to: Handbook, card: many-to-one, inverse: sections, kind: composition, source: { slot: handbook } }
+  refersTo:   { from: Section, to: Section, card: many-to-many, inverse: referredBy, kind: reference }
+functions:
+  parseHandbook: { description: "a handbook named in free text", args: { text: string }, result: HandbookId }
+  parseSection:  { description: "a section cited in free text ('mục 2.1 sổ tay HB-001')", args: { text: string }, result: SectionRef }
+  citeSection:   { description: "how a section is cited", args: { ref: SectionRef }, result: string }
+  summary:       { description: "A handbook's title, owner and how many sections it has.", args: { handbook: { type: "ref<Handbook>", required: true } }, result: HandbookSummary }
+surfaces:
+  discover: { description: find the evidence, tools: [find_section, read, find_handbook] }
+  answer:   { description: quote what is cited, tools: [quote] }

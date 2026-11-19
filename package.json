@@ -1,0 +1,36 @@
+{
+  "name": "@ontology-harness/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Ontology harness runtime: a spec of object types, links, functions and surfaces served to agents as typed tools and to applications as an API, over the stores that hold the data. Generic: no domain code; a project plugs in by a module exporting `project`.",
+  "bin": {
+    "harness": "./bin/harness.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "test": "node --test src/*.test.ts src/typed/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "typescript": "^5.9.3"
+  },
+  "files": [
+    "dist",
+    "bin/harness.js"
+  ]
+}
