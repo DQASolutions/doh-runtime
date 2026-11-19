@@ -1,9 +1,25 @@
 {
-  "name": "@dqa/doh-runtime",
+  "name": "@dqa-ai-solutions/doh-runtime",
   "version": "0.1.0",
-  "private": true,
-  "type": "module",
   "description": "Ontology harness runtime: a spec of object types, links, functions and surfaces served to agents as typed tools and to applications as an API, over the stores that hold the data. Generic: no domain code; a project plugs in by a module exporting `project`.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DQASolutions/doh-runtime.git"
+  },
+  "homepage": "https://github.com/DQASolutions/doh-runtime#readme",
+  "bugs": {
+    "url": "https://github.com/DQASolutions/doh-runtime/issues"
+  },
+  "keywords": [
+    "ontology",
+    "agent",
+    "llm",
+    "tools",
+    "harness",
+    "typed-tools"
+  ],
+  "type": "module",
   "bin": {
     "harness": "./bin/harness.js"
   },
@@ -13,8 +29,15 @@
       "default": "./dist/index.js"
     }
   },
+  "files": [
+    "dist",
+    "bin/harness.js"
+  ],
   "engines": {
     "node": ">=22.18"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "test": "node --test src/*.test.ts src/typed/*.test.ts",
@@ -28,9 +51,5 @@
   "devDependencies": {
     "@types/node": "^22.18.0",
     "typescript": "^5.9.3"
-  },
-  "files": [
-    "dist",
-    "bin/harness.js"
-  ]
+  }
 }

@@ -1,4 +1,4 @@
-# @dqa/doh-runtime
+# @dqa-ai-solutions/doh-runtime
 
 An agent harness generated from an ontology. A project declares its object types, links, functions and surfaces once
 (a `spec.yaml` and a module exporting `project`); the runtime serves them to agents as typed tools and to
@@ -9,14 +9,14 @@ Needs Node >= 22.18.
 ## Use
 
 ```bash
-npm install @dqa/doh-runtime          # or a packed file: npm install ./dqa-doh-runtime-0.1.0.tgz
+npm install @dqa-ai-solutions/doh-runtime          # or a packed file: npm install ./dqa-ai-solutions-doh-runtime-0.1.0.tgz
 npx harness serve --project project.ts --port 8796
 ```
 
 A project module (TypeScript runs as is on Node >= 22.18, outside `node_modules`):
 
 ```ts
-import type { Project } from "@dqa/doh-runtime";
+import type { Project } from "@dqa-ai-solutions/doh-runtime";
 
 export const project: Project = {
   spec: new URL("./spec.yaml", import.meta.url).pathname,
