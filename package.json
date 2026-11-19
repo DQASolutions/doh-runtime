@@ -20,7 +20,7 @@
     "test": "node --test src/*.test.ts src/typed/*.test.ts",
     "typecheck": "tsc -p tsconfig.json",
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
-    "prepack": "npm run build"
+    "prepare": "npm run build"
   },
   "dependencies": {
     "yaml": "^2.9.1"
